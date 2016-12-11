@@ -34,7 +34,12 @@ contract ElectricityGenerate {
     
     event Approval(address indexed _owner, address indexed _spender, uint256 _value);
     
-    
+    /* This unnamed function is called whenever someone tries to send ether to it */
+    function () payable {
+
+        
+
+    }
     
 
     /*Функция selfdestruct уничтожает контракт и отправляет все средства со счета контракта на адрес, указанный в аргументе*/
