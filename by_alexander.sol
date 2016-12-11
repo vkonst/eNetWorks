@@ -1,30 +1,28 @@
 pragma solidity ^0.4.2;
 contract DevConAlfaEnergy {
-   /* Public variables of the token */
-   //  uint public generated;
-   //  uint public consumpted;
+
    string public name;
    address public owner;
+
+   //Деньгами управляет только владелец
    modifier onlyOwner { if (msg.sender != owner) throw; _; }
-   /* This creates an array with all balances */
-   // mapping (address => string) public devProject;
+
    mapping (address => bool) public isMember;
    mapping (address => uint) public generated;
    mapping (address => uint) public consumed;
    mapping (address => uint) public balance;
    mapping (address => string) public memberName;
-   /* This generates a public event on the blockchain that will notify clients */
+
+   //Событие добавления нового домохозяйства
     event newMember(address member, string name);
-   // event rewardPayed(address developer, string project);
-   // event newResultGenerated(address consumer, uint generated);
-   // event newResultConsumed(address consumer, uint consumed);
-   /* Initializes contract */
-   function DevConAlfaEnergy  (        ) {
+
+   function DevConAlfaEnergy  () {
        name = 'DevCon School Energy Estimate';
        owner = msg.sender;
    }
    
    function addNewMember(address _member, string _name) onlyOwner returns (bool success) {
+      //Добавление нового домохозяйства
        isMember[_member]= true;
        memberName[_member]= _name;
        newMember(_member, _name);
@@ -32,15 +30,18 @@ contract DevConAlfaEnergy {
    }
    
    function declareGenerated(uint _generated)returns (bool success) {
+      //Декларируем сколько сгенерировано электроэнергии
        generated[msg.sender] += _generated;
        return true;
    }
    function declareConsumed(uint _consumed)returns (bool success) {
+      //Декларируем сколько потреблено электроэнергии
        consumed[msg.sender] += _consumed;
        return true;
    }
    
    function settle(address _consumer) onlyOwner payable returns (bool success) {
+      //Фиксация расчётов
        if (generated[_consumer] - consumed[_consumer] > 0){
            if(!msg.sender.send((generated[_consumer] - consumed[_consumer])*100 finney)) throw;
        } else if (balance[_consumer] > 0) {
@@ -54,6 +55,7 @@ contract DevConAlfaEnergy {
    }
    
    function deposit(uint amount) payable returns (bool success) {
+      //Депонирование средств на смарт-контракт
        if (isMember[msg.sender]){
            if(msg.value >0) {
                balance[msg.sender] += msg.value;
@@ -61,15 +63,6 @@ contract DevConAlfaEnergy {
        }
    }
    
-   // function payReward(string _project) payable returns (bool success) {
-   //         if (!rewarded[msg.sender] && devActive[msg.sender]) {
-   //         rewarded[msg.sender] = true;
-   //         if(!msg.sender.send(100 finney)) throw;
-   //         rewardPayed(msg.sender, _project);
-   //         return true;
-   //         }
-       
-   // }
    /* This unnamed function is called whenever someone tries to send ether to it */
    function () payable {
        
