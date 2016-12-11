@@ -1,12 +1,11 @@
-personal.unlockAccount("адрес_аккаунта", "пароль_аккаунта", 300)
 
-var _greeting = "hello world!222" ;
-var greeterContract = web3.eth.contract([{"constant":false,"inputs":[],"name":"kill","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"greet","outputs":[{"name":"","type":"string"}],"payable":false,"type":"function"},{"inputs":[{"name":"_greeting","type":"string"}],"payable":false,"type":"constructor"}]);
-var greeter = greeterContract.new(
-   _greeting,
+personal.unlockAccount("0x964d8e455b5e2e2aa392dd444d8ed2cd6b481b72", "12345");
+
+var electricitygenerateContract = web3.eth.contract([{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"success","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"kill","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"el_generated","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_add","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_value","type":"uint256"}],"name":"emissionFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_owner","type":"address"},{"indexed":true,"name":"_spender","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Approval","type":"event"}]);
+var electricitygenerate = electricitygenerateContract.new(
    {
-     from: "адрес_аккаунта", 
-     data: '0x60606040523461000057604051610330380380610330833981016040528080518201919060200150505b5b33600060006101000a81548173ffffffffffffffffffffffffffffffffffffffff02191690836c010000000000000000000000009081020402179055505b8060019080519060200190828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f106100b457805160ff19168380011785556100e2565b828001600101855582156100e2579182015b828111156100e15782518255916020019190600101906100c6565b5b50905061010791905b808211156101035760008160009055506001016100eb565b5090565b50505b505b6102168061011a6000396000f360606040526000357c01000000000000000000000000000000000000000000000000000000009004806341c0e1b514610043578063cfae321714610052575b610000565b34610000576100506100cd565b005b346100005761005f610161565b60405180806020018281038252838181518152602001915080519060200190808383829060006004602084601f0104600302600f01f150905090810190601f1680156100bf5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b600060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141561015e57600060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16ff5b5b565b602060405190810160405280600081526020015060018054600181600116156101000203166002900480601f01602080910402602001604051908101604052809291908181526020018280546001816001161561010002031660029004801561020b5780601f106101e05761010080835404028352916020019161020b565b820191906000526020600020905b8154815290600101906020018083116101ee57829003601f168201915b505050505090505b9056', 
+     from: "0x964d8e455b5e2e2aa392dd444d8ed2cd6b481b72", 
+     data: '0x606060405234610000575b6102c4806100186000396000f360606040523615610070576000357c010000000000000000000000000000000000000000000000000000000090048063095ea7b31461007557806341c0e1b5146100b157806353146750146100c057806370a08231146100f1578063dd62ed3e14610122578063e49441c31461015c575b610000565b34610000576100996004808035906020019091908035906020019091905050610198565b60405180821515815260200191505060405180910390f35b34610000576100be6101a1565b005b34610000576100db6004808035906020019091905050610235565b6040518082815260200191505060405180910390f35b346100005761010c600480803590602001909190505061024d565b6040518082815260200191505060405180910390f35b34610000576101466004808035906020019091908035906020019091905050610281565b6040518082815260200191505060405180910390f35b3461000057610180600480803590602001909190803590602001909190505061028a565b60405180821515815260200191505060405180910390f35b60005b92915050565b600060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141561023257600060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16ff5b5b565b60016020528060005260406000206000915090505481565b6000600160008373ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000205490505b919050565b60005b92915050565b600081600160008573ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020819055508090505b9291505056', 
      gas: '4700000'
    }, function (e, contract){
     console.log(e, contract);
@@ -15,17 +14,14 @@ var greeter = greeterContract.new(
     }
  })
 
-//Ждём 2-3 минуты пока замайним
+//Ждём пока сгенерится контракт
 
-//Получаем адрес замайненого контракта
-Contract mined! address: 0x02a9f91f40ce7eb73550aa5718ba1ea65d42a9e2 transactionHash: 0x3cfc42d798b80775b174e03e3c01f28ed9d13b324c2b9451b3725820757b9292
+var concon = web3.eth.contract(abi).at("адрес_контракта");
 
-//Заводим abi (спецификация контракта)
-var abi = [{"constant":false,"inputs":[],"name":"kill","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"greet","outputs":[{"name":"","type":"string"}],"payable":false,"type":"function"},{"inputs":[{"name":"_greeting","type":"string"}],"payable":false,"type":"constructor"}]
 
-//Удостоверяемся: что всё ок (выдаст заголовок контракта)
-web3.eth.contract(abi).at("0x02a9f91f40ce7eb73550aa5718ba1ea65d42a9e2")
+//Выполняем транзакцию
+personal.unlockAccount("0x964d8e455b5e2e2aa392dd444d8ed2cd6b481b72", "12345");
+concon.emissionFrom.sendTransaction("0x964d8e455b5e2e2aa392dd444d8ed2cd6b481b72", 1000, {from:"0x964d8e455b5e2e2aa392dd444d8ed2cd6b481b72"})
 
-//Вызываем контракт
-
-greeter.greet();
+//Смотрим что там
+concon.balanceOf("0x964d8e455b5e2e2aa392dd444d8ed2cd6b481b72")
